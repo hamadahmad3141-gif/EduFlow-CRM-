@@ -1,0 +1,545 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>EduFlow CRM & Admission Automation System</title>
+    <!-- Chart.js for Live Analytics Graphs -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <style>
+        :root {
+            --primary: #2563eb;
+            --primary-dark: #1d4ed8;
+            --secondary: #10b981;
+            --bg: #f8fafc;
+            --card: #ffffff;
+            --text: #1e293b;
+            --muted: #64748b;
+        }
+        * { box-sizing: border-box; margin: 0; padding: 0; font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; }
+        body { background: var(--bg); color: var(--text); }
+        
+        /* Navigation */
+        nav {
+            background: var(--card);
+            padding: 1rem 5%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+        .logo { font-size: 1.4rem; font-weight: 700; color: var(--primary); }
+        .nav-btns button {
+            padding: 0.6rem 1.2rem;
+            border: none;
+            border-radius: 6px;
+            cursor: pointer;
+            font-weight: 600;
+            margin-left: 10px;
+            transition: 0.2s;
+        }
+        .btn-active { background: var(--primary); color: white; }
+        .btn-inactive { background: #e2e8f0; color: var(--text); }
+        .btn-logout { background: #ef4444; color: white; }
+
+        /* Containers */
+        .container { max-width: 1150px; margin: 2rem auto; padding: 0 1rem; }
+        .hidden { display: none !important; }
+
+        /* Landing Page Hero */
+        .hero {
+            background: linear-gradient(135deg, #1e3a8a, #2563eb);
+            color: white;
+            padding: 3rem 2rem;
+            border-radius: 12px;
+            text-align: center;
+            margin-bottom: 2rem;
+        }
+        .hero h1 { font-size: 2.2rem; margin-bottom: 0.8rem; }
+        .hero p { font-size: 1.1rem; opacity: 0.9; max-width: 650px; margin: 0 auto; }
+
+        /* Form & Login Cards */
+        .form-card {
+            background: var(--card);
+            max-width: 500px;
+            margin: 0 auto;
+            padding: 2rem;
+            border-radius: 12px;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.06);
+        }
+        .form-card h2 { margin-bottom: 1.5rem; text-align: center; color: var(--primary); }
+        .form-group { margin-bottom: 1.2rem; }
+        .form-group label { display: block; margin-bottom: 0.4rem; font-weight: 600; font-size: 0.9rem; }
+        .form-group input, .form-group select {
+            width: 100%;
+            padding: 0.75rem;
+            border: 1px solid #cbd5e1;
+            border-radius: 6px;
+            font-size: 1rem;
+        }
+        .submit-btn {
+            width: 100%;
+            padding: 0.9rem;
+            background: var(--primary);
+            color: white;
+            border: none;
+            border-radius: 6px;
+            font-size: 1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: 0.2s;
+        }
+        .submit-btn:hover { background: var(--primary-dark); }
+        .error-msg { color: #ef4444; font-size: 0.85rem; margin-top: 0.5rem; text-align: center; display: none; }
+
+        /* Automation Toast Notification */
+        #toast {
+            position: fixed;
+            bottom: 25px;
+            right: 25px;
+            background: #0f172a;
+            color: white;
+            padding: 1rem 1.5rem;
+            border-radius: 8px;
+            border-left: 5px solid var(--secondary);
+            box-shadow: 0 10px 25px rgba(0,0,0,0.2);
+            display: none;
+            z-index: 1000;
+            max-width: 350px;
+        }
+
+        /* Admin Dashboard */
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+            gap: 1.5rem;
+            margin-bottom: 2rem;
+        }
+        .stat-box {
+            background: var(--card);
+            padding: 1.5rem;
+            border-radius: 10px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.04);
+            border-top: 4px solid var(--primary);
+        }
+        .stat-box h3 { font-size: 0.9rem; color: var(--muted); margin-bottom: 0.5rem; }
+        .stat-box .num { font-size: 2rem; font-weight: 700; }
+
+        /* Charts Section */
+        .charts-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(340px, 1fr));
+            gap: 1.5rem;
+            margin-bottom: 2rem;
+        }
+        .chart-card {
+            background: var(--card);
+            padding: 1.5rem;
+            border-radius: 10px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.04);
+        }
+        .chart-card h3 { margin-bottom: 1rem; font-size: 1rem; color: var(--text); text-align: center; }
+        .chart-wrapper { position: relative; height: 250px; width: 100%; }
+
+        /* CRM Table */
+        .table-card {
+            background: var(--card);
+            padding: 1.5rem;
+            border-radius: 10px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.04);
+            overflow-x: auto;
+        }
+        .table-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 1rem; }
+        table { width: 100%; border-collapse: collapse; text-align: left; }
+        th, td { padding: 0.9rem; border-bottom: 1px solid #e2e8f0; }
+        th { background: #f1f5f9; font-size: 0.85rem; text-transform: uppercase; color: var(--muted); }
+        .badge {
+            padding: 0.3rem 0.7rem;
+            border-radius: 20px;
+            font-size: 0.8rem;
+            font-weight: 600;
+        }
+        .badge-pending { background: #fef3c7; color: #b45309; }
+        .badge-confirmed { background: #d1fae5; color: #065f46; }
+        .action-btn {
+            padding: 0.4rem 0.8rem;
+            background: var(--secondary);
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 0.85rem;
+        }
+        .action-btn:disabled { background: #cbd5e1; cursor: not-allowed; }
+        .clear-btn {
+            padding: 0.4rem 0.8rem;
+            background: #ef4444;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 0.85rem;
+        }
+    </style>
+</head>
+<body>
+
+    <nav>
+        <div class="logo">EduFlow Automation</div>
+        <div class="nav-btns">
+            <button id="btnStudent" class="btn-active" onclick="switchView('student')">Student Landing Page</button>
+            <button id="btnAdmin" class="btn-inactive" onclick="switchView('admin')">Admin CRM Dashboard</button>
+            <button id="btnLogout" class="btn-logout hidden" onclick="logoutAdmin()">Logout</button>
+        </div>
+    </nav>
+
+    <!-- STUDENT LANDING PAGE VIEW -->
+    <div id="studentView" class="container">
+        <div class="hero">
+            <h1>Build Your Future in Digital Tech</h1>
+            <p>Admissions Open for 2026! Fill out the form below for instant registration and automated career counseling.</p>
+        </div>
+
+        <div class="form-card">
+            <h2>Student Admission Form</h2>
+            <form id="admissionForm" onsubmit="handleFormSubmit(event)">
+                <div class="form-group">
+                    <label>Full Name *</label>
+                    <input type="text" id="studentName" required placeholder="e.g. Ayesha Khan">
+                </div>
+                <div class="form-group">
+                    <label>Father's Name *</label>
+                    <input type="text" id="fatherName" required placeholder="e.g. Tariq Mahmood">
+                </div>
+                <div class="form-group">
+                    <label>Email Address *</label>
+                    <input type="email" id="studentEmail" required placeholder="ayesha@example.com">
+                </div>
+                <div class="form-group">
+                    <label>Phone / WhatsApp Number *</label>
+                    <input type="tel" id="studentPhone" required placeholder="0300-1234567">
+                </div>
+                <div class="form-group">
+                    <label>Select Desired Course *</label>
+                    <select id="studentCourse" required>
+                        <option value="Digital Marketing & Automation">Digital Marketing & Automation</option>
+                        <option value="Next Generation Networks">Next Generation Networks</option>
+                        <option value="Full Stack Web Development">Full Stack Web Development</option>
+                        <option value="Data Analytics & AI">Data Analytics & AI</option>
+                    </select>
+                </div>
+                <button type="submit" class="submit-btn">Submit Application</button>
+            </form>
+        </div>
+    </div>
+
+    <!-- ADMIN LOGIN VIEW -->
+    <div id="loginView" class="container hidden">
+        <div class="form-card" style="margin-top: 3rem;">
+            <h2>Admin CRM Authentication</h2>
+            <p style="text-align: center; color: var(--muted); font-size: 0.9rem; margin-bottom: 1.5rem;">
+                Enter administrator credentials to access live CRM records and analytics.
+            </p>
+            <form onsubmit="handleLogin(event)">
+                <div class="form-group">
+                    <label>Admin Username</label>
+                    <input type="text" id="adminUser" required placeholder="admin">
+                </div>
+                <div class="form-group">
+                    <label>Password</label>
+                    <input type="password" id="adminPass" required placeholder="••••••">
+                </div>
+                <button type="submit" class="submit-btn">Login to Dashboard</button>
+                <div id="loginError" class="error-msg">Invalid credentials! (Use: admin / admin123)</div>
+            </form>
+        </div>
+    </div>
+
+    <!-- ADMIN CRM DASHBOARD VIEW -->
+    <div id="adminView" class="container hidden">
+        <div class="stats-grid">
+            <div class="stat-box">
+                <h3>Total Leads Synced</h3>
+                <div class="num" id="totalLeads">0</div>
+            </div>
+            <div class="stat-box" style="border-top-color: #f59e0b;">
+                <h3>Pending Follow-Ups</h3>
+                <div class="num" id="pendingLeads">0</div>
+            </div>
+            <div class="stat-box" style="border-top-color: #10b981;">
+                <h3>Confirmed Admissions</h3>
+                <div class="num" id="confirmedLeads">0</div>
+            </div>
+            <div class="stat-box" style="border-top-color: #8b5cf6;">
+                <h3>Automated Emails Sent</h3>
+                <div class="num" id="emailsSent">0</div>
+            </div>
+        </div>
+
+        <!-- ANALYTICS CHARTS -->
+        <div class="charts-grid">
+            <div class="chart-card">
+                <h3>Leads Distribution by Course</h3>
+                <div class="chart-wrapper">
+                    <canvas id="courseChart"></canvas>
+                </div>
+            </div>
+            <div class="chart-card">
+                <h3>Admission Conversion Status</h3>
+                <div class="chart-wrapper">
+                    <canvas id="statusChart"></canvas>
+                </div>
+            </div>
+        </div>
+
+        <!-- CRM LEAD TABLE -->
+        <div class="table-card">
+            <div class="table-header">
+                <h2>Real-Time CRM Lead Tracker</h2>
+                <button class="clear-btn" onclick="clearAllData()">Reset Demo Data</button>
+            </div>
+            <table>
+                <thead>
+                    <tr>
+                        <th>Date & Time</th>
+                        <th>Student Name</th>
+                        <th>Father's Name</th>
+                        <th>Contact</th>
+                        <th>Course</th>
+                        <th>Status</th>
+                        <th>Action</th>
+                    </tr>
+                </thead>
+                <tbody id="crmTableBody">
+                    <!-- Dynamic Rows Here -->
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+    <!-- AUTOMATION NOTIFICATION POPUP -->
+    <div id="toast"></div>
+
+    <script>
+        let isAuthenticated = false;
+        let courseChartInstance = null;
+        let statusChartInstance = null;
+
+        // Initial Sample Leads
+        let leads = JSON.parse(localStorage.getItem('eduflow_leads')) || [
+            {
+                id: 101,
+                timestamp: "15/11/2026, 10:30 AM",
+                name: "Ali Raza",
+                father: "Muhammad Akram",
+                email: "ali.raza@example.com",
+                phone: "0321-6956295",
+                course: "Next Generation Networks",
+                status: "Confirmed"
+            },
+            {
+                id: 102,
+                timestamp: "15/11/2026, 11:15 AM",
+                name: "Sara Ahmed",
+                father: "Ahmed Bilal",
+                email: "sara.a@example.com",
+                phone: "0300-1234567",
+                course: "Digital Marketing & Automation",
+                status: "Pending"
+            }
+        ];
+
+        function switchView(view) {
+            document.getElementById('studentView').classList.add('hidden');
+            document.getElementById('loginView').classList.add('hidden');
+            document.getElementById('adminView').classList.add('hidden');
+
+            if (view === 'student') {
+                document.getElementById('studentView').classList.remove('hidden');
+                document.getElementById('btnStudent').className = 'btn-active';
+                document.getElementById('btnAdmin').className = 'btn-inactive';
+            } else if (view === 'admin') {
+                document.getElementById('btnStudent').className = 'btn-inactive';
+                document.getElementById('btnAdmin').className = 'btn-active';
+                
+                if (isAuthenticated) {
+                    document.getElementById('adminView').classList.remove('hidden');
+                    renderDashboard();
+                } else {
+                    document.getElementById('loginView').classList.remove('hidden');
+                }
+            }
+        }
+
+        function handleLogin(e) {
+            e.preventDefault();
+            const user = document.getElementById('adminUser').value.trim();
+            const pass = document.getElementById('adminPass').value.trim();
+
+            if (user === 'admin' && pass === 'admin123') {
+                isAuthenticated = true;
+                document.getElementById('loginError').style.display = 'none';
+                document.getElementById('btnLogout').classList.remove('hidden');
+                document.getElementById('adminUser').value = '';
+                document.getElementById('adminPass').value = '';
+                switchView('admin');
+                showToast("<strong>Login Successful!</strong><br>Welcome to EduFlow CRM Dashboard.");
+            } else {
+                document.getElementById('loginError').style.display = 'block';
+            }
+        }
+
+        function logoutAdmin() {
+            isAuthenticated = false;
+            document.getElementById('btnLogout').classList.add('hidden');
+            switchView('student');
+            showToast("Logged out of Admin CRM.");
+        }
+
+        function showToast(message) {
+            const toast = document.getElementById('toast');
+            toast.innerHTML = message;
+            toast.style.display = 'block';
+            setTimeout(() => { toast.style.display = 'none'; }, 4500);
+        }
+
+        function handleFormSubmit(e) {
+            e.preventDefault();
+            
+            const newLead = {
+                id: Date.now(),
+                timestamp: new Date().toLocaleString([], { dateStyle: 'short', timeStyle: 'short' }),
+                name: document.getElementById('studentName').value,
+                father: document.getElementById('fatherName').value,
+                email: document.getElementById('studentEmail').value,
+                phone: document.getElementById('studentPhone').value,
+                course: document.getElementById('studentCourse').value,
+                status: 'Pending'
+            };
+
+            leads.unshift(newLead);
+            localStorage.setItem('eduflow_leads', JSON.stringify(leads));
+            document.getElementById('admissionForm').reset();
+
+            showToast(`<strong>Automation Triggered!</strong><br>1. Data synced to CRM.<br>2. Welcome email sent to ${newLead.email}.`);
+        }
+
+        function confirmAdmission(id) {
+            leads = leads.map(lead => {
+                if (lead.id === id) {
+                    lead.status = 'Confirmed';
+                    showToast(`<strong>Admission Confirmed!</strong><br>Confirmation alert sent to ${lead.name} (${lead.phone}).`);
+                }
+                return lead;
+            });
+            localStorage.setItem('eduflow_leads', JSON.stringify(leads));
+            renderDashboard();
+        }
+
+        function updateCharts(pending, confirmed) {
+            // Course Count Calculation
+            const courseCounts = {
+                "Digital Marketing & Automation": 0,
+                "Next Generation Networks": 0,
+                "Full Stack Web Development": 0,
+                "Data Analytics & AI": 0
+            };
+            leads.forEach(l => {
+                if (courseCounts[l.course] !== undefined) {
+                    courseCounts[l.course]++;
+                }
+            });
+
+            // Destroy old charts before redrawing
+            if (courseChartInstance) courseChartInstance.destroy();
+            if (statusChartInstance) statusChartInstance.destroy();
+
+            // Bar Chart: Courses
+            const ctxCourse = document.getElementById('courseChart').getContext('2d');
+            courseChartInstance = new Chart(ctxCourse, {
+                type: 'bar',
+                data: {
+                    labels: ['Digital Marketing', 'Next Gen Networks', 'Web Dev', 'Data & AI'],
+                    datasets: [{
+                        label: 'Enrolled Leads',
+                        data: Object.values(courseCounts),
+                        backgroundColor: ['#2563eb', '#10b981', '#f59e0b', '#8b5cf6'],
+                        borderRadius: 6
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    plugins: { legend: { display: false } },
+                    scales: { y: { beginAtZero: true, ticks: { stepSize: 1 } } }
+                }
+            });
+
+            // Doughnut Chart: Status
+            const ctxStatus = document.getElementById('statusChart').getContext('2d');
+            statusChartInstance = new Chart(ctxStatus, {
+                type: 'doughnut',
+                data: {
+                    labels: ['Pending Follow-Up', 'Confirmed Admission'],
+                    datasets: [{
+                        data: [pending, confirmed],
+                        backgroundColor: ['#f59e0b', '#10b981'],
+                        borderWidth: 2
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false
+                }
+            });
+        }
+
+        function renderDashboard() {
+            const tbody = document.getElementById('crmTableBody');
+            tbody.innerHTML = '';
+
+            let pending = 0;
+            let confirmed = 0;
+
+            leads.forEach(lead => {
+                if (lead.status === 'Pending') pending++;
+                else confirmed++;
+
+                const row = `
+                    <tr>
+                        <td>${lead.timestamp}</td>
+                        <td><strong>${lead.name}</strong><br><small style="color:#64748b">${lead.email}</small></td>
+                        <td>${lead.father}</td>
+                        <td>${lead.phone}</td>
+                        <td>${lead.course}</td>
+                        <td><span class="badge ${lead.status === 'Confirmed' ? 'badge-confirmed' : 'badge-pending'}">${lead.status}</span></td>
+                        <td>
+                            <button class="action-btn" onclick="confirmAdmission(${lead.id})" ${lead.status === 'Confirmed' ? 'disabled' : ''}>
+                                ${lead.status === 'Confirmed' ? 'Confirmed ✓' : 'Confirm Admission'}
+                            </button>
+                        </td>
+                    </tr>
+                `;
+                tbody.innerHTML += row;
+            });
+
+            document.getElementById('totalLeads').innerText = leads.length;
+            document.getElementById('pendingLeads').innerText = pending;
+            document.getElementById('confirmedLeads').innerText = confirmed;
+            document.getElementById('emailsSent').innerText = leads.length + confirmed;
+
+            updateCharts(pending, confirmed);
+        }
+
+        function clearAllData() {
+            localStorage.removeItem('eduflow_leads');
+            leads = [];
+            renderDashboard();
+            showToast("Demo data cleared.");
+        }
+    </script>
+</body>
+</html>

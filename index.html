@@ -1,0 +1,770 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DigiNext Academy | NDU Certified Digital Skills & E-Learning</title>
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Google Fonts: Poppins & Inter -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Poppins:wght@500;600;700;800&display=swap" rel="stylesheet">
+    <!-- Font Awesome for Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        sans: ['Inter', 'sans-serif'],
+                        heading: ['Poppins', 'sans-serif'],
+                    },
+                    colors: {
+                        brand: {
+                            dark: '#0A1128',
+                            navy: '#001F54',
+                            royal: '#034078',
+                            cyan: '#00B4D8',
+                            accent: '#1282A2',
+                            light: '#F8FAFC'
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+
+    <style>
+        /* Subtle Digital Circuit / Dot Matrix Background */
+        .bg-circuit-pattern {
+            background-color: #0A1128;
+            background-image: 
+                radial-gradient(rgba(0, 180, 216, 0.16) 1.5px, transparent 1.5px),
+                radial-gradient(rgba(3, 64, 120, 0.25) 1.5px, #0A1128 1.5px);
+            background-size: 36px 36px;
+            background-position: 0 0, 18px 18px;
+        }
+
+        .glass-card {
+            background: rgba(255, 255, 255, 0.04);
+            backdrop-filter: blur(12px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .glow-btn {
+            box-shadow: 0 0 25px rgba(0, 180, 216, 0.45);
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        .glow-btn:hover {
+            box-shadow: 0 0 38px rgba(0, 180, 216, 0.75);
+            transform: translateY(-2px);
+        }
+
+        .course-card {
+            transition: all 0.3s ease;
+        }
+        .course-card:hover {
+            transform: translateY(-6px);
+            box-shadow: 0 20px 35px -10px rgba(3, 64, 120, 0.15);
+            border-color: #00B4D8;
+        }
+    </style>
+</head>
+<body class="bg-slate-50 text-slate-800 font-sans antialiased selection:bg-brand-cyan selection:text-white">
+
+    <!-- Top Announcement Bar -->
+    <div class="bg-gradient-to-r from-brand-navy via-brand-royal to-brand-accent text-white text-xs sm:text-sm py-2 px-4">
+        <div class="max-w-7xl mx-auto flex flex-col sm:flex-row items-center justify-between gap-2 text-center">
+            <div class="flex items-center gap-2 font-medium">
+                <span class="inline-flex items-center px-2 py-0.5 rounded-full text-xs font-semibold bg-brand-cyan/20 text-cyan-200 border border-cyan-400/30">
+                    <i class="fa-solid fa-certificate mr-1.5 text-brand-cyan"></i> NDU Certified Franchise
+                </span>
+                <span>Admissions Open for New Digital Skills Batch!</span>
+            </div>
+            <div class="flex items-center gap-4">
+                <a href="tel:03216956295" class="hover:text-cyan-200 transition flex items-center gap-1.5 font-semibold">
+                    <i class="fa-brands fa-whatsapp text-emerald-400 text-base"></i> Helpline: 0321-6956295
+                </a>
+            </div>
+        </div>
+    </div>
+
+    <!-- Header / Navigation Bar -->
+    <header class="sticky top-0 z-40 bg-white/95 backdrop-blur-md border-b border-slate-200/80 shadow-sm">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between items-center h-20">
+                <!-- Brand Logo -->
+                <a href="#home" class="flex items-center gap-3 group">
+                    <div class="w-11 h-11 rounded-xl bg-gradient-to-br from-brand-navy to-brand-cyan flex items-center justify-center text-white shadow-md group-hover:scale-105 transition">
+                        <i class="fa-solid fa-laptop-code text-xl"></i>
+                    </div>
+                    <div>
+                        <div class="flex items-center gap-2">
+                            <span class="font-heading font-extrabold text-xl sm:text-2xl tracking-tight text-brand-dark">
+                                DigiNext <span class="text-brand-cyan">Academy</span>
+                            </span>
+                        </div>
+                        <p class="text-[11px] font-semibold uppercase tracking-wider text-slate-500">
+                            NDU Certified E-Learning Portal
+                        </p>
+                    </div>
+                </a>
+
+                <!-- Desktop Navigation -->
+                <nav class="hidden md:flex items-center gap-8 font-medium text-sm text-slate-600">
+                    <a href="#home" class="hover:text-brand-royal transition">Home</a>
+                    <a href="#about-project" class="hover:text-brand-royal transition">About Project</a>
+                    <a href="#courses" class="hover:text-brand-royal transition">Courses</a>
+                    <a href="#why-us" class="hover:text-brand-royal transition">Why Choose Us</a>
+                    <a href="#contact" class="hover:text-brand-royal transition">Contact</a>
+                </nav>
+
+                <!-- CTA & Mobile Toggle -->
+                <div class="flex items-center gap-3">
+                    <a href="admission.html" data-apply-link class="apply-redirect-btn inline-flex items-center gap-2 bg-gradient-to-r from-brand-royal to-brand-cyan hover:from-brand-navy hover:to-brand-royal text-white font-heading font-semibold text-sm px-5 py-2.5 rounded-xl shadow-md transition-all">
+                        <span>Apply Now</span>
+                        <i class="fa-solid fa-arrow-right text-xs"></i>
+                    </a>
+                    <button id="mobile-menu-btn" aria-label="Toggle Menu" class="md:hidden p-2.5 rounded-xl text-slate-700 hover:bg-slate-100 transition">
+                        <i class="fa-solid fa-bars text-xl"></i>
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Mobile Navigation Dropdown -->
+        <div id="mobile-menu" class="hidden md:hidden bg-white border-t border-slate-100 px-4 pt-3 pb-5 space-y-2 shadow-lg">
+            <a href="#home" class="block px-3 py-2.5 rounded-lg font-medium text-slate-700 hover:bg-slate-50">Home</a>
+            <a href="#about-project" class="block px-3 py-2.5 rounded-lg font-medium text-slate-700 hover:bg-slate-50">About Project</a>
+            <a href="#courses" class="block px-3 py-2.5 rounded-lg font-medium text-slate-700 hover:bg-slate-50">Featured Courses</a>
+            <a href="#why-us" class="block px-3 py-2.5 rounded-lg font-medium text-slate-700 hover:bg-slate-50">Why DigiNext</a>
+            <a href="#contact" class="block px-3 py-2.5 rounded-lg font-medium text-slate-700 hover:bg-slate-50">Contact</a>
+            <div class="pt-2">
+                <a href="admission.html" data-apply-link class="apply-redirect-btn w-full flex justify-center items-center gap-2 bg-brand-royal text-white font-semibold py-3 rounded-xl">
+                    Apply Now <i class="fa-solid fa-arrow-right"></i>
+                </a>
+            </div>
+        </div>
+    </header>
+
+    <!-- Hero Section -->
+    <section id="home" class="relative bg-circuit-pattern text-white overflow-hidden pt-16 pb-24 lg:pt-24 lg:pb-32">
+        <!-- Ambient Gradient Blobs -->
+        <div class="absolute -top-24 -left-24 w-96 h-96 bg-brand-cyan/20 rounded-full blur-3xl pointer-events-none"></div>
+        <div class="absolute bottom-0 right-0 w-[30rem] h-[30rem] bg-brand-royal/30 rounded-full blur-3xl pointer-events-none"></div>
+
+        <div class="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="grid lg:grid-cols-12 gap-12 items-center">
+                <!-- Left Hero Content -->
+                <div class="lg:col-span-7 space-y-6 text-center lg:text-left">
+                    <div class="inline-flex items-center gap-2 px-4 py-1.5 rounded-full glass-card text-cyan-300 text-xs sm:text-sm font-medium">
+                        <span class="w-2 h-2 rounded-full bg-emerald-400 animate-pulse"></span>
+                        <span>Next-Generation E-Learning & Smart CRM Admission Portal</span>
+                    </div>
+
+                    <h1 class="font-heading font-extrabold text-3xl sm:text-5xl lg:text-[3.4rem] leading-tight tracking-tight">
+                        Master In-Demand <span class="text-transparent bg-clip-text bg-gradient-to-r from-brand-cyan to-sky-300">Digital Skills</span> & Build Your Future
+                    </h1>
+
+                    <p class="text-slate-300 text-base sm:text-lg leading-relaxed max-w-2xl mx-auto lg:mx-0">
+                        Welcome to <strong class="text-white">DigiNext Academy</strong> — an innovative, <strong class="text-cyan-300">NDU Certified</strong> digital skills platform designed to bridge the gap between academic learning and real-world industry careers through practical training and smart student onboarding.
+                    </p>
+
+                    <!-- Primary Action Buttons -->
+                    <div class="flex flex-col sm:flex-row items-center justify-center lg:justify-start gap-4 pt-2">
+                        <a href="admission.html" data-apply-link class="apply-redirect-btn glow-btn w-full sm:w-auto inline-flex items-center justify-center gap-3 bg-gradient-to-r from-brand-cyan to-sky-500 text-brand-dark font-heading font-bold text-base sm:text-lg px-8 py-4 rounded-2xl">
+                            <span>Apply Now</span>
+                            <i class="fa-solid fa-paper-plane"></i>
+                        </a>
+                        <a href="#courses" class="w-full sm:w-auto inline-flex items-center justify-center gap-2 glass-card hover:bg-white/10 text-white font-semibold text-base px-7 py-4 rounded-2xl transition">
+                            <span>Explore Courses</span>
+                            <i class="fa-solid fa-chevron-down text-xs text-brand-cyan"></i>
+                        </a>
+                    </div>
+
+                    <!-- Trust & Contact Badges -->
+                    <div class="pt-6 flex flex-wrap items-center justify-center lg:justify-start gap-6 text-sm text-slate-300 border-t border-white/10">
+                        <div class="flex items-center gap-2.5">
+                            <div class="w-9 h-9 rounded-lg bg-emerald-500/20 border border-emerald-400/30 flex items-center justify-center text-emerald-400">
+                                <i class="fa-brands fa-whatsapp text-lg"></i>
+                            </div>
+                            <div class="text-left">
+                                <p class="text-[11px] uppercase tracking-wider text-slate-400">Admission Helpline</p>
+                                <p class="font-bold text-white">0321-6956295</p>
+                            </div>
+                        </div>
+                        <div class="flex items-center gap-2.5">
+                            <div class="w-9 h-9 rounded-lg bg-cyan-500/20 border border-cyan-400/30 flex items-center justify-center text-brand-cyan">
+                                <i class="fa-solid fa-award text-lg"></i>
+                            </div>
+                            <div class="text-left">
+                                <p class="text-[11px] uppercase tracking-wider text-slate-400">Accreditation</p>
+                                <p class="font-bold text-white">NDU Certified Courses</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Right Hero Visual Card (Interactive Project Preview) -->
+                <div class="lg:col-span-5">
+                    <div class="glass-card rounded-3xl p-6 sm:p-8 shadow-2xl relative">
+                        <div class="flex items-center justify-between pb-5 border-b border-white/10">
+                            <div class="flex items-center gap-3">
+                                <div class="w-10 h-10 rounded-xl bg-brand-cyan/20 flex items-center justify-center text-brand-cyan">
+                                    <i class="fa-solid fa-graduation-cap text-lg"></i>
+                                </div>
+                                <div>
+                                    <h3 class="font-heading font-bold text-white text-base">Smart Admission Portal</h3>
+                                    <p class="text-xs text-cyan-300">CRM-Integrated Enrollment System</p>
+                                </div>
+                            </div>
+                            <span class="px-3 py-1 rounded-full bg-emerald-500/20 text-emerald-300 text-xs font-semibold border border-emerald-500/30">
+                                Live Portal
+                            </span>
+                        </div>
+
+                        <div class="py-6 space-y-4">
+                            <div class="flex items-start gap-3.5 bg-white/5 p-3.5 rounded-2xl border border-white/5">
+                                <i class="fa-solid fa-circle-check text-brand-cyan mt-1"></i>
+                                <div>
+                                    <h4 class="font-semibold text-sm text-white">100% Practical & Project-Based</h4>
+                                    <p class="text-xs text-slate-300 mt-0.5">Hands-on labs, real client workflows & live mentorship.</p>
+                                </div>
+                            </div>
+                            <div class="flex items-start gap-3.5 bg-white/5 p-3.5 rounded-2xl border border-white/5">
+                                <i class="fa-solid fa-bolt text-amber-400 mt-1"></i>
+                                <div>
+                                    <h4 class="font-semibold text-sm text-white">Instant Digital Onboarding</h4>
+                                    <p class="text-xs text-slate-300 mt-0.5">Submit your admission inquiry online and get instant CRM confirmation.</p>
+                                </div>
+                            </div>
+                            <div class="flex items-start gap-3.5 bg-white/5 p-3.5 rounded-2xl border border-white/5">
+                                <i class="fa-solid fa-laptop text-sky-400 mt-1"></i>
+                                <div>
+                                    <h4 class="font-semibold text-sm text-white">Flexible Online & Hybrid Batches</h4>
+                                    <p class="text-xs text-slate-300 mt-0.5">Designed for students, freelancers & working professionals.</p>
+                                </div>
+                            </div>
+                        </div>
+
+                        <a href="admission.html" data-apply-link class="apply-redirect-btn w-full flex items-center justify-center gap-2 bg-white text-brand-dark hover:bg-cyan-50 font-heading font-bold py-3.5 rounded-xl transition shadow-lg">
+                            <span>Proceed to Admission Form</span>
+                            <i class="fa-solid fa-arrow-up-right-from-square text-xs text-brand-royal"></i>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Brief Project Intro Section -->
+    <section id="about-project" class="py-16 lg:py-20 bg-white border-b border-slate-200/70">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="max-w-3xl mx-auto text-center space-y-4">
+                <span class="inline-block px-3.5 py-1 rounded-full bg-sky-100 text-brand-royal font-semibold text-xs uppercase tracking-wider">
+                    About The Project
+                </span>
+                <h2 class="font-heading font-bold text-2xl sm:text-4xl text-brand-dark">
+                    Empowering Youth with Certified Digital Excellence
+                </h2>
+                <p class="text-slate-600 text-base sm:text-lg leading-relaxed">
+                    <strong>DigiNext Academy</strong> is a modern EdTech initiative operating as an <strong>NDU Certified Franchise</strong>. Our platform combines high-demand technical & creative training programs with a streamlined, automated CRM admission system—making enrollment, counseling, and student tracking seamless from first click to certification.
+                </p>
+            </div>
+
+            <!-- Stats Strip -->
+            <div class="grid grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-6 mt-12">
+                <div class="bg-slate-50 border border-slate-200/80 rounded-2xl p-6 text-center">
+                    <div class="text-3xl font-heading font-extrabold text-brand-royal">5+</div>
+                    <div class="text-sm font-medium text-slate-600 mt-1">Career-Focused Tracks</div>
+                </div>
+                <div class="bg-slate-50 border border-slate-200/80 rounded-2xl p-6 text-center">
+                    <div class="text-3xl font-heading font-extrabold text-brand-cyan">100%</div>
+                    <div class="text-sm font-medium text-slate-600 mt-1">Practical Live Projects</div>
+                </div>
+                <div class="bg-slate-50 border border-slate-200/80 rounded-2xl p-6 text-center">
+                    <div class="text-3xl font-heading font-extrabold text-brand-royal">NDU</div>
+                    <div class="text-sm font-medium text-slate-600 mt-1">Recognized Certification</div>
+                </div>
+                <div class="bg-slate-50 border border-slate-200/80 rounded-2xl p-6 text-center">
+                    <div class="text-3xl font-heading font-extrabold text-emerald-600">24/7</div>
+                    <div class="text-sm font-medium text-slate-600 mt-1">Smart Portal Support</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Featured Courses Section -->
+    <section id="courses" class="py-20 bg-slate-50">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex flex-col md:flex-row md:items-end justify-between mb-12 gap-4">
+                <div class="space-y-3">
+                    <span class="inline-block px-3.5 py-1 rounded-full bg-cyan-100 text-brand-royal font-semibold text-xs uppercase tracking-wider">
+                        Industry-Ready Curriculum
+                    </span>
+                    <h2 class="font-heading font-bold text-2xl sm:text-4xl text-brand-dark">
+                        Our Featured Certification Courses
+                    </h2>
+                    <p class="text-slate-600 max-w-2xl">
+                        Choose from our specialized programs crafted by industry mentors. Click any course to proceed directly to the online admission form.
+                    </p>
+                </div>
+                <a href="admission.html" data-apply-link class="apply-redirect-btn inline-flex items-center gap-2 text-brand-royal font-heading font-bold hover:text-brand-cyan transition">
+                    <span>View Admission Form</span>
+                    <i class="fa-solid fa-arrow-right"></i>
+                </a>
+            </div>
+
+            <!-- Courses Grid -->
+            <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-7">
+                
+                <!-- Course 1 -->
+                <div class="course-card bg-white rounded-3xl p-7 border border-slate-200/90 flex flex-col justify-between">
+                    <div>
+                        <div class="flex items-center justify-between mb-5">
+                            <div class="w-13 h-13 w-12 h-12 rounded-2xl bg-sky-100 text-brand-royal flex items-center justify-center text-xl">
+                                <i class="fa-solid fa-bullhorn"></i>
+                            </div>
+                            <span class="px-3 py-1 rounded-full bg-emerald-50 text-emerald-700 text-xs font-semibold border border-emerald-200">
+                                Most Popular
+                            </span>
+                        </div>
+                        <h3 class="font-heading font-bold text-xl text-brand-dark mb-2.5">
+                            Digital Marketing & Social Media Management
+                        </h3>
+                        <p class="text-slate-600 text-sm leading-relaxed mb-5">
+                            Master Meta Ads, Google Search & SEO, content strategy, lead generation funnels, and brand scaling across major social platforms.
+                        </p>
+                    </div>
+                    <div>
+                        <div class="flex items-center gap-4 text-xs font-medium text-slate-500 py-3.5 border-t border-slate-100">
+                            <span><i class="fa-regular fa-clock text-brand-cyan mr-1"></i> 8 Weeks</span>
+                            <span><i class="fa-solid fa-video text-brand-cyan mr-1"></i> Live Mentorship</span>
+                        </div>
+                        <a href="admission.html" data-apply-link data-course="Digital Marketing" class="apply-redirect-btn mt-2 w-full inline-flex items-center justify-center gap-2 bg-slate-100 hover:bg-brand-royal text-slate-800 hover:text-white font-semibold text-sm py-3 rounded-xl transition">
+                            <span>Enroll in this Course</span>
+                            <i class="fa-solid fa-arrow-right text-xs"></i>
+                        </a>
+                    </div>
+                </div>
+
+                <!-- Course 2 -->
+                <div class="course-card bg-white rounded-3xl p-7 border border-slate-200/90 flex flex-col justify-between">
+                    <div>
+                        <div class="flex items-center justify-between mb-5">
+                            <div class="w-12 h-12 rounded-2xl bg-indigo-100 text-indigo-700 flex items-center justify-center text-xl">
+                                <i class="fa-solid fa-code"></i>
+                            </div>
+                            <span class="px-3 py-1 rounded-full bg-indigo-50 text-indigo-700 text-xs font-semibold border border-indigo-200">
+                                High Demand
+                            </span>
+                        </div>
+                        <h3 class="font-heading font-bold text-xl text-brand-dark mb-2.5">
+                            Web Development & Frontend Design
+                        </h3>
+                        <p class="text-slate-600 text-sm leading-relaxed mb-5">
+                            Build responsive, modern websites and web apps using HTML5, CSS3, Tailwind CSS, JavaScript, and interactive UI/UX best practices.
+                        </p>
+                    </div>
+                    <div>
+                        <div class="flex items-center gap-4 text-xs font-medium text-slate-500 py-3.5 border-t border-slate-100">
+                            <span><i class="fa-regular fa-clock text-brand-cyan mr-1"></i> 12 Weeks</span>
+                            <span><i class="fa-solid fa-laptop-code text-brand-cyan mr-1"></i> Online / Hybrid</span>
+                        </div>
+                        <a href="admission.html" data-apply-link data-course="Web Development" class="apply-redirect-btn mt-2 w-full inline-flex items-center justify-center gap-2 bg-slate-100 hover:bg-brand-royal text-slate-800 hover:text-white font-semibold text-sm py-3 rounded-xl transition">
+                            <span>Enroll in this Course</span>
+                            <i class="fa-solid fa-arrow-right text-xs"></i>
+                        </a>
+                    </div>
+                </div>
+
+                <!-- Course 3 -->
+                <div class="course-card bg-white rounded-3xl p-7 border border-slate-200/90 flex flex-col justify-between">
+                    <div>
+                        <div class="flex items-center justify-between mb-5">
+                            <div class="w-12 h-12 rounded-2xl bg-pink-100 text-pink-600 flex items-center justify-center text-xl">
+                                <i class="fa-solid fa-pen-nib"></i>
+                            </div>
+                            <span class="px-3 py-1 rounded-full bg-pink-50 text-pink-700 text-xs font-semibold border border-pink-200">
+                                Creative Track
+                            </span>
+                        </div>
+                        <h3 class="font-heading font-bold text-xl text-brand-dark mb-2.5">
+                            Graphic Design & Branding (Canva & Adobe)
+                        </h3>
+                        <p class="text-slate-600 text-sm leading-relaxed mb-5">
+                            Create stunning visual identities, social media kits, marketing flyers, and professional logos using Canva Pro, Illustrator & Photoshop.
+                        </p>
+                    </div>
+                    <div>
+                        <div class="flex items-center gap-4 text-xs font-medium text-slate-500 py-3.5 border-t border-slate-100">
+                            <span><i class="fa-regular fa-clock text-brand-cyan mr-1"></i> 6 Weeks</span>
+                            <span><i class="fa-solid fa-video text-brand-cyan mr-1"></i> Live Mentorship</span>
+                        </div>
+                        <a href="admission.html" data-apply-link data-course="Graphic Design" class="apply-redirect-btn mt-2 w-full inline-flex items-center justify-center gap-2 bg-slate-100 hover:bg-brand-royal text-slate-800 hover:text-white font-semibold text-sm py-3 rounded-xl transition">
+                            <span>Enroll in this Course</span>
+                            <i class="fa-solid fa-arrow-right text-xs"></i>
+                        </a>
+                    </div>
+                </div>
+
+                <!-- Course 4 -->
+                <div class="course-card bg-white rounded-3xl p-7 border border-slate-200/90 flex flex-col justify-between">
+                    <div>
+                        <div class="flex items-center justify-between mb-5">
+                            <div class="w-12 h-12 rounded-2xl bg-amber-100 text-amber-700 flex items-center justify-center text-xl">
+                                <i class="fa-solid fa-cart-shopping"></i>
+                            </div>
+                            <span class="px-3 py-1 rounded-full bg-amber-50 text-amber-700 text-xs font-semibold border border-amber-200">
+                                Earn Online
+                            </span>
+                        </div>
+                        <h3 class="font-heading font-bold text-xl text-brand-dark mb-2.5">
+                            E-Commerce & Freelancing Mastery
+                        </h3>
+                        <p class="text-slate-600 text-sm leading-relaxed mb-5">
+                            Launch profitable Shopify & local e-commerce stores and win global clients on Fiverr & Upwork with proven proposal strategies.
+                        </p>
+                    </div>
+                    <div>
+                        <div class="flex items-center gap-4 text-xs font-medium text-slate-500 py-3.5 border-t border-slate-100">
+                            <span><i class="fa-regular fa-clock text-brand-cyan mr-1"></i> 8 Weeks</span>
+                            <span><i class="fa-solid fa-globe text-brand-cyan mr-1"></i> Online Live</span>
+                        </div>
+                        <a href="admission.html" data-apply-link data-course="E-Commerce & Freelancing" class="apply-redirect-btn mt-2 w-full inline-flex items-center justify-center gap-2 bg-slate-100 hover:bg-brand-royal text-slate-800 hover:text-white font-semibold text-sm py-3 rounded-xl transition">
+                            <span>Enroll in this Course</span>
+                            <i class="fa-solid fa-arrow-right text-xs"></i>
+                        </a>
+                    </div>
+                </div>
+
+                <!-- Course 5 -->
+                <div class="course-card bg-white rounded-3xl p-7 border border-slate-200/90 flex flex-col justify-between">
+                    <div>
+                        <div class="flex items-center justify-between mb-5">
+                            <div class="w-12 h-12 rounded-2xl bg-cyan-100 text-cyan-700 flex items-center justify-center text-xl">
+                                <i class="fa-solid fa-network-wired"></i>
+                            </div>
+                            <span class="px-3 py-1 rounded-full bg-cyan-50 text-cyan-700 text-xs font-semibold border border-cyan-200">
+                                Core Tech
+                            </span>
+                        </div>
+                        <h3 class="font-heading font-bold text-xl text-brand-dark mb-2.5">
+                            Next-Gen Networking & IT Fundamentals
+                        </h3>
+                        <p class="text-slate-600 text-sm leading-relaxed mb-5">
+                            Understand computer networks, cloud essentials, cybersecurity basics, system administration, and modern IT infrastructure.
+                        </p>
+                    </div>
+                    <div>
+                        <div class="flex items-center gap-4 text-xs font-medium text-slate-500 py-3.5 border-t border-slate-100">
+                            <span><i class="fa-regular fa-clock text-brand-cyan mr-1"></i> 10 Weeks</span>
+                            <span><i class="fa-solid fa-server text-brand-cyan mr-1"></i> Lab + Live</span>
+                        </div>
+                        <a href="admission.html" data-apply-link data-course="Networking & IT" class="apply-redirect-btn mt-2 w-full inline-flex items-center justify-center gap-2 bg-slate-100 hover:bg-brand-royal text-slate-800 hover:text-white font-semibold text-sm py-3 rounded-xl transition">
+                            <span>Enroll in this Course</span>
+                            <i class="fa-solid fa-arrow-right text-xs"></i>
+                        </a>
+                    </div>
+                </div>
+
+                <!-- Special Career Counseling / Direct Apply Card -->
+                <div class="rounded-3xl p-7 bg-gradient-to-br from-brand-navy via-brand-royal to-brand-accent text-white flex flex-col justify-between shadow-xl">
+                    <div>
+                        <div class="w-12 h-12 rounded-2xl bg-white/15 flex items-center justify-center text-brand-cyan text-xl mb-5">
+                            <i class="fa-solid fa-headset"></i>
+                        </div>
+                        <h3 class="font-heading font-bold text-xl mb-2.5">
+                            Not Sure Which Track Fits You Best?
+                        </h3>
+                        <p class="text-cyan-100 text-sm leading-relaxed mb-5">
+                            Submit your details on our Admission Portal and our academic counselors will guide you to the ideal NDU Certified skill track.
+                        </p>
+                    </div>
+                    <div>
+                        <div class="text-xs text-cyan-200 py-3.5 border-t border-white/15 flex items-center gap-2">
+                            <i class="fa-brands fa-whatsapp text-emerald-300 text-base"></i>
+                            <span>Direct Support: 0321-6956295</span>
+                        </div>
+                        <a href="admission.html" data-apply-link class="apply-redirect-btn mt-2 w-full inline-flex items-center justify-center gap-2 bg-white text-brand-dark hover:bg-cyan-50 font-heading font-bold text-sm py-3 rounded-xl transition shadow-md">
+                            <span>Apply Now for Guidance</span>
+                            <i class="fa-solid fa-arrow-right text-xs"></i>
+                        </a>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <!-- Why DigiNext / Platform Highlights -->
+    <section id="why-us" class="py-20 bg-white border-t border-slate-200/70">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center max-w-3xl mx-auto mb-14 space-y-3">
+                <span class="inline-block px-3.5 py-1 rounded-full bg-sky-100 text-brand-royal font-semibold text-xs uppercase tracking-wider">
+                    Why Choose DigiNext
+                </span>
+                <h2 class="font-heading font-bold text-2xl sm:text-4xl text-brand-dark">
+                    Built for Modern Learners & Seamless Admissions
+                </h2>
+            </div>
+
+            <div class="grid sm:grid-cols-2 lg:grid-cols-4 gap-6">
+                <div class="p-6 rounded-2xl bg-slate-50 border border-slate-200/70 hover:border-brand-cyan transition">
+                    <div class="w-11 h-11 rounded-xl bg-brand-royal text-white flex items-center justify-center text-lg mb-4">
+                        <i class="fa-solid fa-certificate"></i>
+                    </div>
+                    <h3 class="font-heading font-bold text-lg text-brand-dark mb-2">NDU Certification</h3>
+                    <p class="text-sm text-slate-600 leading-relaxed">
+                        Earn verified credentials backed by an official NDU Certified Franchise to boost your CV and portfolio.
+                    </p>
+                </div>
+
+                <div class="p-6 rounded-2xl bg-slate-50 border border-slate-200/70 hover:border-brand-cyan transition">
+                    <div class="w-11 h-11 rounded-xl bg-brand-cyan text-brand-dark flex items-center justify-center text-lg mb-4">
+                        <i class="fa-solid fa-diagram-project"></i>
+                    </div>
+                    <h3 class="font-heading font-bold text-lg text-brand-dark mb-2">CRM Admission Flow</h3>
+                    <p class="text-sm text-slate-600 leading-relaxed">
+                        Zero paperwork delays—your application is directly logged into our Admin CRM dashboard for fast follow-ups.
+                    </p>
+                </div>
+
+                <div class="p-6 rounded-2xl bg-slate-50 border border-slate-200/70 hover:border-brand-cyan transition">
+                    <div class="w-11 h-11 rounded-xl bg-brand-royal text-white flex items-center justify-center text-lg mb-4">
+                        <i class="fa-solid fa-chalkboard-user"></i>
+                    </div>
+                    <h3 class="font-heading font-bold text-lg text-brand-dark mb-2">Live Expert Mentors</h3>
+                    <p class="text-sm text-slate-600 leading-relaxed">
+                        Learn directly from active industry professionals with interactive Q&A, assignments, and feedback.
+                    </p>
+                </div>
+
+                <div class="p-6 rounded-2xl bg-slate-50 border border-slate-200/70 hover:border-brand-cyan transition">
+                    <div class="w-11 h-11 rounded-xl bg-brand-cyan text-brand-dark flex items-center justify-center text-lg mb-4">
+                        <i class="fa-solid fa-briefcase"></i>
+                    </div>
+                    <h3 class="font-heading font-bold text-lg text-brand-dark mb-2">Portfolio & Career Prep</h3>
+                    <p class="text-sm text-slate-600 leading-relaxed">
+                        Graduate with real-world capstone projects ready to showcase to employers and freelance clients.
+                    </p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Prominent Bottom Call-to-Action (CTA) Banner -->
+    <section class="py-16 px-4 sm:px-6 lg:px-8 bg-slate-50">
+        <div class="max-w-6xl mx-auto rounded-3xl bg-circuit-pattern text-white p-8 sm:p-14 text-center relative overflow-hidden shadow-2xl border border-brand-cyan/30">
+            <div class="absolute -top-20 -right-20 w-72 h-72 bg-brand-cyan/20 rounded-full blur-3xl pointer-events-none"></div>
+            <div class="absolute -bottom-20 -left-20 w-72 h-72 bg-brand-royal/40 rounded-full blur-3xl pointer-events-none"></div>
+
+            <div class="relative z-10 max-w-2xl mx-auto space-y-6">
+                <span class="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-white/10 text-cyan-300 text-xs font-semibold uppercase tracking-wider">
+                    <i class="fa-solid fa-rocket"></i> Limited Seats Available
+                </span>
+                <h2 class="font-heading font-extrabold text-3xl sm:text-5xl leading-tight">
+                    Ready to Start Your Learning Journey?
+                </h2>
+                <p class="text-slate-300 text-base sm:text-lg">
+                    Take the first step toward a high-income digital career. Click below to open our official admission portal and reserve your seat today.
+                </p>
+
+                <!-- Large Prominent Apply Now Button -->
+                <div class="pt-3 flex flex-col sm:flex-row items-center justify-center gap-4">
+                    <a id="bottom-apply-btn" href="admission.html" data-apply-link class="apply-redirect-btn glow-btn w-full sm:w-auto inline-flex items-center justify-center gap-3 bg-gradient-to-r from-brand-cyan via-sky-400 to-cyan-300 text-brand-dark font-heading font-extrabold text-lg sm:text-xl px-10 py-5 rounded-2xl">
+                        <span>Apply Now</span>
+                        <i class="fa-solid fa-arrow-right"></i>
+                    </a>
+                </div>
+
+                <p class="text-xs text-slate-400 pt-2">
+                    Need help applying? Call or WhatsApp our Admission Desk at <strong class="text-white">0321-6956295</strong>
+                </p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer id="contact" class="bg-brand-dark text-slate-300 border-t border-white/10">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-14">
+            <div class="grid md:grid-cols-3 gap-10 pb-10 border-b border-white/10">
+                <!-- Brand Info -->
+                <div class="space-y-4">
+                    <div class="flex items-center gap-3">
+                        <div class="w-10 h-10 rounded-xl bg-gradient-to-br from-brand-royal to-brand-cyan flex items-center justify-center text-white">
+                            <i class="fa-solid fa-laptop-code text-lg"></i>
+                        </div>
+                        <div>
+                            <h3 class="font-heading font-bold text-xl text-white">DigiNext Academy</h3>
+                            <p class="text-xs text-cyan-400 font-medium">NDU Certified Franchise</p>
+                        </div>
+                    </div>
+                    <p class="text-sm text-slate-400 leading-relaxed">
+                        Empowering students with practical digital skills, certified mentorship, and a modern CRM-powered e-learning admission experience.
+                    </p>
+                </div>
+
+                <!-- Quick Links -->
+                <div class="space-y-3">
+                    <h4 class="font-heading font-bold text-white text-base">Quick Navigation</h4>
+                    <ul class="space-y-2 text-sm">
+                        <li><a href="#home" class="hover:text-brand-cyan transition">Home</a></li>
+                        <li><a href="#about-project" class="hover:text-brand-cyan transition">About Project</a></li>
+                        <li><a href="#courses" class="hover:text-brand-cyan transition">Featured Courses</a></li>
+                        <li><a href="#why-us" class="hover:text-brand-cyan transition">Why Choose DigiNext</a></li>
+                        <li><a href="admission.html" data-apply-link class="apply-redirect-btn text-brand-cyan font-semibold hover:underline">Online Admission Portal →</a></li>
+                    </ul>
+                </div>
+
+                <!-- Contact Details -->
+                <div class="space-y-3">
+                    <h4 class="font-heading font-bold text-white text-base">Admission & Helpline</h4>
+                    <div class="space-y-2.5 text-sm">
+                        <p class="flex items-center gap-2.5">
+                            <i class="fa-brands fa-whatsapp text-emerald-400 text-base"></i>
+                            <span>WhatsApp / Call: <strong class="text-white">0321-6956295</strong></span>
+                        </p>
+                        <p class="flex items-center gap-2.5">
+                            <i class="fa-solid fa-certificate text-brand-cyan"></i>
+                            <span>Status: <strong class="text-white">NDU Certified E-Learning Center</strong></span>
+                        </p>
+                        <p class="flex items-center gap-2.5">
+                            <i class="fa-solid fa-globe text-sky-400"></i>
+                            <span>Mode: <strong class="text-white">Online Live & Hybrid Classes</strong></span>
+                        </p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Subtle Link Configuration / Live URL Setup Bar -->
+            <div class="mt-8 p-4 sm:p-5 rounded-2xl bg-white/5 border border-white/10">
+                <div class="flex flex-col lg:flex-row lg:items-center justify-between gap-4">
+                    <div class="space-y-1">
+                        <div class="flex items-center gap-2 text-xs font-semibold uppercase tracking-wider text-brand-cyan">
+                            <i class="fa-solid fa-link"></i>
+                            <span>Second Landing Page Link Setup (Live URL Configuration)</span>
+                        </div>
+                        <p class="text-xs text-slate-400">
+                            Paste your hosted Admission Form URL below so all <strong>"Apply Now"</strong> buttons open your exact second landing page (Default: <code class="text-cyan-300">admission.html</code>).
+                        </p>
+                    </div>
+
+                    <div class="flex flex-col sm:flex-row items-stretch sm:items-center gap-2.5 w-full lg:w-auto">
+                        <input 
+                            type="text" 
+                            id="target-url-input" 
+                            placeholder="e.g. admission.html or https://your-site.netlify.app" 
+                            class="w-full sm:w-80 px-3.5 py-2.5 rounded-xl bg-brand-dark border border-white/20 text-white text-xs focus:outline-none focus:border-brand-cyan"
+                        >
+                        <button id="save-url-btn" type="button" class="px-4 py-2.5 rounded-xl bg-brand-cyan hover:bg-sky-400 text-brand-dark font-bold text-xs transition whitespace-nowrap">
+                            Save Link
+                        </button>
+                        <button id="reset-url-btn" type="button" class="px-3.5 py-2.5 rounded-xl bg-white/10 hover:bg-white/20 text-slate-200 font-medium text-xs transition whitespace-nowrap">
+                            Reset
+                        </button>
+                    </div>
+                </div>
+                <div id="url-status-msg" class="hidden mt-2.5 text-xs text-emerald-400 flex items-center gap-1.5">
+                    <i class="fa-solid fa-circle-check"></i>
+                    <span></span>
+                </div>
+            </div>
+
+            <!-- Copyright -->
+            <div class="mt-8 pt-6 border-t border-white/5 flex flex-col sm:flex-row items-center justify-between text-xs text-slate-500 gap-2">
+                <p>&copy; <span id="current-year"></span> DigiNext Academy (NDU Certified). All rights reserved.</p>
+                <p>Designed for Seamless Student Enrollment & Digital Skills Training.</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Interactive Script for Navigation & Dynamic Second Landing Page Link -->
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            // Set Current Year
+            document.getElementById('current-year').textContent = new Date().getFullYear();
+
+            // Mobile Menu Toggle
+            const mobileMenuBtn = document.getElementById('mobile-menu-btn');
+            const mobileMenu = document.getElementById('mobile-menu');
+            mobileMenuBtn.addEventListener('click', () => {
+                mobileMenu.classList.toggle('hidden');
+            });
+
+            // Close mobile menu when clicking a link
+            mobileMenu.querySelectorAll('a').forEach(link => {
+                link.addEventListener('click', () => {
+                    mobileMenu.classList.add('hidden');
+                });
+            });
+
+            // Dynamic Second Landing Page URL Management
+            const STORAGE_KEY = 'diginext_admission_page_url';
+            const DEFAULT_URL = 'admission.html';
+            const urlInput = document.getElementById('target-url-input');
+            const saveUrlBtn = document.getElementById('save-url-btn');
+            const resetUrlBtn = document.getElementById('reset-url-btn');
+            const statusMsg = document.getElementById('url-status-msg');
+            const applyLinks = document.querySelectorAll('[data-apply-link]');
+
+            function showStatus(text, isSuccess = true) {
+                statusMsg.classList.remove('hidden', 'text-emerald-400', 'text-amber-400');
+                statusMsg.classList.add(isSuccess ? 'text-emerald-400' : 'text-amber-400');
+                statusMsg.querySelector('span').textContent = text;
+            }
+
+            function applyTargetUrl(url) {
+                const cleanUrl = (url && url.trim()) ? url.trim() : DEFAULT_URL;
+                urlInput.value = cleanUrl;
+
+                applyLinks.forEach(anchor => {
+                    const course = anchor.getAttribute('data-course');
+                    if (course) {
+                        const separator = cleanUrl.includes('?') ? '&' : '?';
+                        anchor.setAttribute('href', `${cleanUrl}${separator}course=${encodeURIComponent(course)}`);
+                    } else {
+                        anchor.setAttribute('href', cleanUrl);
+                    }
+                });
+            }
+
+            // Load saved URL on startup
+            try {
+                const savedUrl = localStorage.getItem(STORAGE_KEY) || DEFAULT_URL;
+                applyTargetUrl(savedUrl);
+            } catch (e) {
+                applyTargetUrl(DEFAULT_URL);
+            }
+
+            // Save custom live URL
+            saveUrlBtn.addEventListener('click', () => {
+                const newUrl = urlInput.value.trim();
+                if (!newUrl) {
+                    showStatus('Please enter a valid file name or live URL (e.g., admission.html or https://...)', false);
+                    return;
+                }
+                try {
+                    localStorage.setItem(STORAGE_KEY, newUrl);
+                } catch (e) {
+                    // Fallback if storage is restricted
+                }
+                applyTargetUrl(newUrl);
+                showStatus(`All "Apply Now" buttons are now linked to: ${newUrl}`, true);
+            });
+
+            // Reset to default
+            resetUrlBtn.addEventListener('click', () => {
+                try {
+                    localStorage.removeItem(STORAGE_KEY);
+                } catch (e) {}
+                applyTargetUrl(DEFAULT_URL);
+                showStatus(`Reset to default admission page link: ${DEFAULT_URL}`, true);
+            });
+        });
+    </script>
+</body>
+</html>
